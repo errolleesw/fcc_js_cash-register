@@ -61,22 +61,22 @@ class CashRegister {
       
       return { status: "OPEN", change };
     }
-  }  
+}  
   
-  const cashRegister = new CashRegister(price, cid);
-  
-  // Get DOM elements
-  const cashInput = document.getElementById("cash");
-  const purchaseBtn = document.getElementById("purchase-btn");
-  const changeDue = document.getElementById("change-due");
-  const totalPrice = document.getElementById("total-price");
-  const changeInDrawer = document.getElementById("change-in-drawer");
-  
-  // Helper function to format currency
-  const formatCurrency = (amount) => `$${amount.toFixed(2)}`;
-  
-  // Update display function
-  const updateDisplay = () => {
+const cashRegister = new CashRegister(price, cid);
+
+// Get DOM elements
+const cashInput = document.getElementById("cash");
+const purchaseBtn = document.getElementById("purchase-btn");
+const changeDue = document.getElementById("change-due");
+const totalPrice = document.getElementById("total-price");
+const changeInDrawer = document.getElementById("change-in-drawer");
+
+// Helper function to format currency
+const formatCurrency = (amount) => `$${amount.toFixed(2)}`;
+
+// Update display function
+const updateDisplay = () => {
     totalPrice.innerText = `Total: ${formatCurrency(price)}`;
     
     // Create table for change in drawer
@@ -106,10 +106,10 @@ class CashRegister {
     `;
     
     changeInDrawer.innerHTML = `<h2>Change in Drawer:</h2>${tableHTML}`;
-  };
-  
-  // Handle purchase function
-  const handlePurchase = () => {
+};
+
+// Handle purchase function
+const handlePurchase = () => {
     const cash = parseFloat(cashInput.value);
     
     if (isNaN(cash)) {
@@ -136,10 +136,15 @@ class CashRegister {
     } else {
       changeDue.innerText = `Status: OPEN ${result.change.map(([unit, amount]) => `${unit}: ${formatCurrency(amount)}`).join(' ')}`;
     }
-  };
-  
-  // Initialize display
-  updateDisplay();
-  
-  // Add event listener
-  purchaseBtn.addEventListener("click", handlePurchase);
+};
+
+// Initialize display
+updateDisplay();
+
+// Add event listener
+purchaseBtn.addEventListener("click", handlePurchase);
+
+// Ensure variables can be reassigned
+if (typeof module !== 'undefined') {
+  module.exports = { price, cid, CashRegister };
+}
